@@ -35,20 +35,12 @@ GROUP BY debt_indicator_code, debt_indicator
 ORDER BY average_debt DESC
 LIMIT 10
 
--- Top 10 countries having the highest amount of debt indicator i.e. GNI (current US$)
-SELECT country, debt_indicator, ROUND(debt/1000000000) AS debt
+-- Top 10 countries having the highest amount of debt indicator i.e. External debt stocks, total (DOD, current US$)
+SELECT country, ROUND(debt/1000000000) AS debt
 FROM bank
-WHERE debt_indicator_code='NY.GNP.MKTP.CD'
+WHERE debt_indicator_code='DT.DOD.DECT.CD'
 ORDER BY debt DESC
 LIMIT 10
-
--- Most common debt indicator
-SELECT debt_indicator_code,COUNT(debt_indicator_code) AS debt_indicator
-FROM bank
-GROUP BY debt_indicator_code
-ORDER BY debt_indicator DESC, debt_indicator_code DESC
--- As Number of country * Number of debt indicators = Number of rows
--- So there is no common indicator
 
 -- Top 10 countries with the maximum amount of debt owed
 SELECT country,ROUND(MAX(debt)/1000000000) AS maximum_debt
